@@ -21,6 +21,7 @@ export default function Home() {
             .
           </li>
           <li>Save and see your changes instantly.</li>
+          <div>yellow  xoxoxooxox</div>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
@@ -97,5 +98,6 @@ export default function Home() {
         </a>
       </footer>
     </div>
+    
   );
 }
