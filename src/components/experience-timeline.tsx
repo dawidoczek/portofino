@@ -55,7 +55,7 @@ export function ExperienceTimeline() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <div className="container mx-auto p-4 space-y-8">
+    <div className="container mx-auto p-4 space-y-8 ">
       <h1 className="text-3xl font-bold text-center mb-8">Osiągnięcia & Doświadczenie</h1>
       <div ref={containerRef} className="relative pl-12">
         {/* <div className="absolute left-4 top-0 w-0.5 h-full bg-gray-200"></div> */}
@@ -97,18 +97,18 @@ function TimelineItem({
     
     <motion.div
       ref={itemRef}
-      className="mb-12 relative"
+      className="mb-12 relative backdrop-blur-lg"
       style={{ scale, opacity }}
     >
       <div className="absolute -left-8 top-0 flex items-center justify-center w-8 h-8 bg-primary rounded-full shadow-lg overflow-hidden z-10">
         {/* <Image src="/placeholder.svg?height=32&width=32" alt="" width={32} height={32} /> */}
       </div>
       <motion.div 
-        className="bg-white p-4 rounded-lg shadow-md border border-gray-200 transition-all duration-300"
+        className="bg-[#00000075] p-4 rounded-lg shadow-md border border-gray-200 transition-all duration-300"
       >
-        <h3 className="text-xl font-semibold text-gray-800">{experience.title}</h3>
-        <p className="text-sm text-gray-500 mt-1">{experience.date}</p>
-        <p className="mt-2 text-gray-600">{experience.description}</p>
+        <h3 className="text-xl font-semibold text-white">{experience.title}</h3>
+        <p className="text-sm text-white mt-1">{experience.date}</p>
+        <p className="mt-2 text-white">{experience.description}</p>
         {experience.link ? 
           <p><a href={experience.link} target="_blank"> Więcej informacji</a></p> : ""
         }

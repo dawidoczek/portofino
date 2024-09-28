@@ -120,11 +120,11 @@ body {
 
 .flip-card-front {
   background-color: #bbb;
-  color: black;
+  color: white;
 }
 
 .flip-card-back {
-  background-color: white;
-  color: black;
+  background-color: #00000075;
+  color: white;
   transform: rotateY(180deg);
 }

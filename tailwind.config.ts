@@ -9,6 +9,19 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		backgroundImage:{
+			'1':"url(/background/lake.jpg)",
+			'2':"url(/background/night.jpg)",
+			'3':"url(/background/night&mountain.jpg)",
+			'4':"url(/background/nightsky.jpg)",
+			'5':"url(/background/mirror.jpg)",
+			'6':"url(/background/6.jpg)",
+			'7':"url(/background/7.jpg)",
+			'8':"url(/background/8.jpg)",
+			'9':"url(/background/9.jpg)",
+			'10':"url(/background/10.jpg)",
+			'11':"url(/background/11.jpg)",
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

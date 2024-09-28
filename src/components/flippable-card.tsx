@@ -39,11 +39,12 @@ export function FlippableCardComponent({ project }: FlippableCardProps) {
 
   return (
     <div 
-      className="flip-card-container" 
+      className="flip-card-container " 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
+
       <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
         <div className="flip-card-front">
           <Image src={imageUrl} fill={true} alt={project.title} className="w-full h-full object-cover rounded-lg" />
@@ -56,25 +57,25 @@ export function FlippableCardComponent({ project }: FlippableCardProps) {
             </div>
           </div>
         </div>
-        <div className="flip-card-back">
-          <Card className="h-full bg-white border-gray-400">
+        <div className="flip-card-back backdrop-blur-lg">
+          <Card className="h-full bg-transparent backdrop-blur-lg border-gray-400">
             <CardHeader>
-              <CardTitle className="text-gray-800 flex gap-6">{project.title}
+              <CardTitle className="text-white flex gap-6">{project.title}
               {project.technology.map((tek,key)=>(
                     <Image alt={tek} key={key} src={"https://skillicons.dev/icons?i="+tek+"&theme=light"} width={20} height={20}/>
                     ))}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-700">{project.description}</p>
+              <p className="text-white">{project.description}</p>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant="outline" className="bg-gray-200 text-gray-800 hover:bg-gray-300" asChild>
+              <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" asChild>
                 <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2 h-4 w-4" /> Demo
                 </a>
               </Button>
-              <Button variant="outline" className="bg-gray-200 text-gray-800 hover:bg-gray-300" asChild>
+              <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" asChild>
                 <a href={project.codeLink} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-4 w-4" /> Code
                 </a>

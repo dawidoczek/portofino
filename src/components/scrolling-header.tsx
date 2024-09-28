@@ -1,17 +1,17 @@
 "use client"
 
+import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import { Button } from "@/components/ui/button"
 
 export function ScrollingHeaderComponent() {
   const [scrollPosition, setScrollPosition] = useState(0)
-  const headerRef = useRef<HTMLDivElement>(null) // Reference to header element
+  const headerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
       const position = window.scrollY
       const viewportHeight = window.innerHeight
-      const scrollThreshold = viewportHeight * 0.08 // 8% of viewport height
+      const scrollThreshold = viewportHeight * 0.1 // 10% of viewport height
       const scrollPercentage = Math.min(position / scrollThreshold, 1)
       setScrollPosition(scrollPercentage)
     }
@@ -26,10 +26,9 @@ export function ScrollingHeaderComponent() {
   const calculateTranslateX = () => {
     if (headerRef.current) {
       const headerWidth = headerRef.current.offsetWidth
-      const buttonsWidth = 200 // Estimated buttons width (can be adjusted based on button size)
+      const buttonsWidth = 190 
       const availableSpace = headerWidth - buttonsWidth
 
-      // Translate buttons to the right, proportional to the scroll percentage
       return scrollPosition * availableSpace
     }
     return 0
@@ -46,7 +45,6 @@ export function ScrollingHeaderComponent() {
     opacity: scrollPosition,
     fontSize: "2vw",
   }
-
   return (
     <header 
       ref={headerRef} // Set reference to header
@@ -56,26 +54,25 @@ export function ScrollingHeaderComponent() {
         <div className="flex items-center justify-between w-full relative">
           <div className="flex-1 flex items-center">
             <div 
-              className="font-bold absolute left-[70px] sm:left-[60px] md:left-[150px] "
+              className="font-bold absolute left-[85px] sm:left-[60px] md:left-[250px] "
               style={textStyle}
             >
               Dzień dobry, tu Dawid
             </div>
           </div>
           <div 
-            className="flex space-x-2 absolute left-0 gap-4"
+            className="flex space-x-2 absolute left-0 gap-3"
             style={buttonContainerStyle}
           >
             <a href='https://github.com/dawidoczek' target="_blank" rel="noopener noreferrer">
-            <img src='https://skillicons.dev/icons?i=github&theme=light'/>
+            <Image src='/projekty/github.svg' alt='mój github' width={50} height={50}/>
             </a>
             <a href='https://www.linkedin.com/in/dawid-rej-570582236' target="_blank" rel="noopener noreferrer">
-            <img src='https://skillicons.dev/icons?i=linkedin&theme=light'/>
+            <Image alt="mój linkedin" src='/projekty/linkedin.svg' width={50} height={50}/>
             </a>
             <a href='https://www.facebook.com/profile.php?id=100010370318760' target="_blank" rel="noopener noreferrer">
-            <img src='https://skillicons.dev/icons?i=discord&theme=light'/>
+            <Image alt="mój facebook" src='/projekty/facebook.svg' width={50} height={50}/>
             </a>
-            <img/>
           </div>
         </div>
       </div>

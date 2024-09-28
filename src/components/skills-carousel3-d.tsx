@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 // import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import Image from 'next/image'
 // import { ChevronLeftIcon, ChevronRightIcon, PauseIcon, PlayIcon } from 'lucide-react'
 
 interface Skill {
@@ -117,14 +118,14 @@ export function SkillsCarousel3DComponent() {
   return (
     
     <div className="w-full mx-auto p-0">
-          <h1 className="text-3xl font-bold text-center mb-0">Moje umiejętności</h1>
+          <h1 className="text-3xl font-bold text-center text-white mb-0">Moje umiejętności</h1>
 
       <div className="relative h-[400px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: '1500px' }}>
         {getVisibleCategories().map((categoryIndex, index) => (
   <motion.div
     key={categories[categoryIndex]}
-    className="absolute"
+    className="absolute backdrop-blur-lg"
     initial={false}
     animate={{
       rotateY: (index - 1) * 40,
@@ -134,29 +135,22 @@ export function SkillsCarousel3DComponent() {
       scale: index === 1 ? 1 : index === 3 ? 0 : 0.75,
     }}
     transition={{ duration: 1.2, ease: 'easeInOut' }} 
-    onAnimationStart={() => {
-      // Custom logic when animation starts
-      if (index === 0) {
-        console.log(categoryIndex);
-
-      }
-    }}
     style={{
       transformStyle: 'preserve-3d',
       transformOrigin: 'center center',
       width: isWideScreen ? '28%' : '70%',
-      height:"400px",
+      height:"300px",
       minWidth: "200px",
     }}
   >
-    <Card className="w-full h-[300px] bg-background shadow-lg overflow-hidden">
-      <CardContent className="h-full p-2 relative">
-        <h2 className="text-xl font-bold mb-2 text-center">{categories[categoryIndex]}</h2>
+    <Card className="w-full h-[300px]  shadow-lg bg-[#00000075] overflow-hidden">
+      <CardContent className="h-full p-2 relative ">
+        <h2 className="text-xl font-bold mb-2 text-center text-white">{categories[categoryIndex]}</h2>
         <div className="grid grid-cols-2 gap-1 overflow-y-auto max-h-[350px]">
           {skillsData[categories[categoryIndex]].map((skill) => (
             <div key={skill.name} className="flex flex-col items-center justify-center p-2">
-              <img src={skill.icon} alt={skill.name} className="w-8 h-8 mb-1" />
-              <p className="text-center text-xs font-medium">{skill.name}</p>
+              <Image width={32} height={32} src={skill.icon} alt={skill.name} className="w-8 h-8 mb-1" />
+              <p className="text-center text-xs font-medium text-white">{skill.name}</p>
             </div>
           ))}
         </div>

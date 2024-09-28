@@ -1,24 +1,15 @@
 'use client'
 
-// import { Badge } from "@/components/ui/badge"
-// import type { SkillsData, Project } from '@/types';
-import type { Project } from '@/types';
-import React ,{useRef, useEffect, useState} from "react"
-import {FlippableCardComponent} from "@/components/flippable-card"
-import { ExperienceTimeline } from "./experience-timeline";
+import React, { useRef, useEffect, useState, useCallback } from "react"
 import Image from "next/image"
-import { SkillsCarousel3DComponent } from "./skills-carousel3-d";
-import { ScrollingHeaderComponent } from './scrolling-header';
-export function Portfolio() {
+import { FlippableCardComponent } from "@/components/flippable-card"
+import { ExperienceTimeline } from "./experience-timeline"
+import { SkillsCarousel3DComponent } from "./skills-carousel3-d"
+import { ScrollingHeaderComponent } from './scrolling-header'
+import type { Project } from '@/types'
 
-  const projects:Project[] = [
-    // {
-    //   title: "Pom Express",
-    //   description: "Prosta aplikacja napisana w android studio + firebase do wysyłania powiadomień między uytkownikami, jako przypomnienie o swoim istnieniu dla innych osób",
-    //   demoLink: "#",
-    //   codeLink: "#",
-    //   technology: ["java","androidstudio"],
-    // },
+export function Portfolio() {
+  const projects: Project[] = [
     {
       title: "EscapeWheels",
       description: "Działający sklep internetowy którego byłem współtwórcą, oraz głównym Administratorem. Wykorzystuje Wordpressa z Woocomercem.",
@@ -34,7 +25,6 @@ export function Portfolio() {
       codeLink: "/404",
       technology: ["angular","nodejs","postgresql","express","androidstudio"],
       imageUrl: "/projekty/notifical.png",
-
     },
     {
       title: "Zsen Kalendarz",
@@ -43,23 +33,14 @@ export function Portfolio() {
       codeLink: "https://github.com/dawidoczek/ZSEN-KALENDARZ",
       technology: ["angular","firebase","bootstrap","nodejs"],
       imageUrl: "/projekty/kalendarz.png",
-
     },
-    // {
-    //   title: "get-saved-wifi-passwords",
-    //   description: "Robi dokładnie to co napisane, daje nam zapisane hasła na komputerze windows, do pliku txt, zeby się juz więcej nie zastanawiać",
-    //   demoLink: "#",
-    //   codeLink: "https://github.com/dawidoczek/get-saved-wifi-passwords",
-    //   technology: ["cpp"],
-    // },
     {
       title: "Radio ZSEN",
-      description: "Strona szkolnego radia, wraz z opcją głosowania na to co ma lecieć w radiowęźle, stworzona w reactcie wraz z Firebasem. Połączona wraz z moimi własnymi Api do scrapeowania geniusa w poszukiwaniu brzydków słow, działa z spotify oraz youtube.",
+      description: "Strona szkolnego radia, stworzona w reactcie wraz z Firebasem. Posiada Api do scrapeowania geniusa w celu szukania brzydkich słów.",
       demoLink: "https://radio-zsen.web.app",
       codeLink: "/404",
       technology: ["react","bootstrap","firebase","nodejs","php"],
       imageUrl: "/projekty/radiozsen.png",
-
     },
     {
       title: "Kulki the game",
@@ -69,83 +50,143 @@ export function Portfolio() {
       technology: ["unity","cs","firebase","react"],
       imageUrl: "/projekty/kulki.png",
     },
-    // {
-    //   title: "MultiWindowsCamera",
-    //   description: "Prosty proof of concept, wykorzystująca Qt do zabawy z kamerą, za pomocą 3 trybów, dzielony ekran, 'połamane lustro' oraz wygaszacz ekranu",
-    //   demoLink: "#",
-    //   codeLink: "https://github.com/dawidoczek/MultiWindowsCamera",
-    //   technology: ["qt","cpp"],
-    // },
-
     {
       title: "Arkanoid",
       description: "Prosty klon Arkanoida wykonany w c++ za pomocą biblioteki Allegro5, słuzący do nauki Testowania oprogramowania",
       demoLink: "/404",
       codeLink: "https://github.com/dawidoczek/Arkanoid",
-      technology: ["cpp",],
+      technology: ["cpp"],
       imageUrl: "/projekty/gra2.gif",
     },
-
   ]
   
-  
-  const imageRef = useRef<HTMLImageElement>(null);
-  const [scale, setScale] = useState(1); // State for scaling image
+  const imageRef = useRef<HTMLDivElement>(null)
+  const [imageStyle, setImageStyle] = useState({})
+  const [initialPosition, setInitialPosition] = useState({ top: 0, left: 0 });
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const scaleValue = Math.max(0.20, 1 - scrollY / 600);
-      console.log(scaleValue) 
-      setScale(scaleValue);
-    };
+    if (imageRef.current) {
+      const rect = imageRef.current.getBoundingClientRect();
+      setInitialPosition({ top: rect.top, left: rect.left });
+    }
+  }, []); 
 
-    window.addEventListener("scroll", handleScroll);
+  
+  const handleScroll = useCallback(() => {
+    if (imageRef.current) {
+      const scrollY = window.scrollY;
+      const wSize = window.innerWidth
+      // const scaleValue = Math.max(wSize>=725 ?  0.25 : 0.5, 1 - scrollY / 600);
+      const scaleValue = wSize>=725 ?  0.25 : 0.5
+      // const topValue = Math.max(0, initialPosition.top - scrollY / 2);
+      const topValue =0
+      // const leftValue = Math.max(0, initialPosition.left - scrollY / 2);
+      const leftValue = 0
+      if (scrollY>10){
+      
+      setImageStyle({
+        position: 'fixed',
+        top: `${topValue}px`,
+        left: `${leftValue}px`,
+        zIndex: 50,
+        transform: `scale(${scaleValue})`,
+        transition: 'transform 0.25s ease-out, top 0.25s ease-out, left 0.25s ease-out',
+        transformOrigin: 'top left',
+      });
+    }else{
+      setImageStyle({
+        position: 'fixed',
+        top: `${initialPosition.top - scrollY / 2}px`,
+        left: `${initialPosition.left - scrollY / 2}px`,
+        zIndex: 50,
+        transform: `scale(${1})`,
+        transition: 'transform 0.25s ease-out, top 0.25s ease-out, left 0.25s ease-out',
+        transformOrigin: 'top left',
+      });
+    }
+  }
+  }, [initialPosition]);
+
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [handleScroll])
 
   return (
-      <div className="min-h-screen flex flex-col bg-gray-100 text-gray-900">
-        {/* <header className="bg-gray-900 text-white p-6 rounded-b-lg shadow-md flex sticky top-0 z-50">
-          <h1 className="text-4xl font-bold text-center">yellow 2:electric boogaloo</h1>
-        </header> */}
-        <ScrollingHeaderComponent/>
-        <section className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-            <h2 className="text-3xl font-semibold mb-4 text-gray-800">Dzień dobry, tu Dawid</h2>
-            <p className="text-lg text-gray-700">
-              co tu się robi many ale faza
-            </p>
-          </section>
-         <Image
-          ref={imageRef}
+    <div className="min-h-screen bg-no-repeat bg-8  bg-cover  bg-center bg-fixed text-gray-900">
+      <ScrollingHeaderComponent />
+
+      <div className="container mx-auto px-4 py-8">
+        {/* Photo and Description */}
+       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+  <div className="lg:col-span-3">
+    <div className="flex flex-col md:flex-row gap-8">
+      
+      {/* Dummy div to reserve space for the fixed image */}
+      <div className="w-32 h-32 md:w-64 md:h-64 flex-shrink-0"></div> 
+
+      {/* Fixed Image Section */}
+      <div 
+        ref={imageRef}
+        className="flex-shrink-0 fixed"
+        style={imageStyle}
+      >
+        <Image
           src="/projekty/dawid.png"
           alt="Zdjęcie twórcy"
           width={256}
-          height={32}
-          className="sticky top-0 z-50" style={{
-            transform: `scale(${scale})`,
-             transition: "transform 0.1s ease-out",
-             transformOrigin: "top left", 
-              }}
+          height={256}
+          className="rounded-full object-cover w-32 h-32 md:w-64 md:h-64" // Scale down for smaller screens
         />
-          {/* grid grid-cols-2 */}
-        <main className=" gap-10 auto-rows-auto container mx-auto px-4 py-8 space-y-8">
+      </div>
+
+      {/* Description Section */}
+      <section className="bg-[#00000075] backdrop-blur-lg p-6 rounded-lg shadow-md border border-gray-200 flex-1">
+        <h2 className="text-3xl font-semibold mb-4 text-white">Dzień dobry, tu Dawid</h2>
+        <p className="text-lg text-white">
+          Jestem tegorocznym absolwentem Zespołu Szkół Energetycznych w Lublinie na profilu technik programista. Mam 19 lat i interesuję się programowaniem od dziewiątego roku życia. Moim ulubionym językiem programowania jest Python, jednak z równie dużym zapałem rozwijam swoje umiejętności w tworzeniu stron internetowych, szczególnie w zakresie backendu.
+          <br />
+          Posiadam certyfikat INF 0.3, który potwierdza moje kompetencje w tworzeniu oraz administrowaniu stronami i aplikacjami internetowymi oraz bazami danych. Jestem osobą pracowitą, cenię sobie rozwój, a także chętnie pomagam innym w osiąganiu ich celów. Obecnie mieszkam w Lublinie.
+          <br />
+          Mój email: <a href='mailto:rej.dawid1@gmail.com' className="text-blue-500">rej.dawid1@gmail.com</a>
+        </p>
+      </section>
+      
+    </div>
+  </div>
+</div>
 
 
+
+        {/* Skills Carousel, Experience, and Projects */}
+        <div className="grid grid-cols-1  lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-3 space-y-8">
+            {/* Skills Carousel */}
+            <div>
+              <SkillsCarousel3DComponent />
+            </div>
+            
+            {/* Experience Timeline */}
+            <div>
+              <ExperienceTimeline />
+            </div>
+          </div>
           
-          <SkillsCarousel3DComponent />
-
-          <ExperienceTimeline/>
-          <section className="bg-gray-300 p-6 rounded-lg shadow-md border border-gray-400 flex flex-col">
-            <h2 className="text-3xl font-semibold mb-4 text-gray-800">Moje projekty</h2>
-            <div className="grid grid-cols-1  md:grid-cols-2 gap-6">
+          {/* Projects */}
+          <div className="lg:col-span-1">
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold text-center mb-8 text-white">Moje projekty</h2>
               {projects.map((project, index) => (
-                <FlippableCardComponent key={index} project={project}></FlippableCardComponent>
+                <FlippableCardComponent key={index} project={project} />
               ))}
             </div>
-          </section>
-        </main>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
       <footer className="bg-gray-900 text-white p-4 mt-8 rounded-t-lg shadow-md">
         <div className="container mx-auto text-center">
           <p>Made with 💛, NextJs, Tailwind CSS, Framer Motion, and Vercel</p>
