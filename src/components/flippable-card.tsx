@@ -1,9 +1,9 @@
 'use client'
 
-import React, {useState } from 'react'
+import React, {useEffect, useRef, useState } from 'react'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Github } from "lucide-react"
+import { ChevronDownIcon, ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
 interface FlippableCardProps {
   project: {
@@ -19,6 +19,34 @@ interface FlippableCardProps {
 export function FlippableCardComponent({ project }: FlippableCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
   const [isClickLocked, setIsClickLocked] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isScrollable, setIsScrollable] = useState(false);
+
+  useEffect(() => {
+    const contentEl = contentRef.current;
+
+    if (contentEl && contentEl.scrollHeight > contentEl.clientHeight) {
+      setIsScrollable(true);
+    }
+
+    const handleScroll = () => {
+      if (contentEl && contentEl.scrollHeight - contentEl.scrollTop === contentEl.clientHeight) {
+        setIsScrollable(false);
+      }
+    };
+
+    if (contentEl) {
+      contentEl.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (contentEl) {
+        contentEl.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
+
 
   const imageUrl = project.imageUrl || "/placeholder.svg?height=300&width=400"
 
@@ -31,7 +59,7 @@ export function FlippableCardComponent({ project }: FlippableCardProps) {
   }
 
   const handleClick = () => {
-    return;
+    // return;
     setIsClickLocked(!isClickLocked)
     setIsFlipped(isFlipped)
   }
@@ -67,7 +95,12 @@ export function FlippableCardComponent({ project }: FlippableCardProps) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-white">{project.description}</p>
+              <p className="text-white max-h-36 overflow-y-scroll " ref={contentRef}>{project.description}</p>
+              {isScrollable && (
+            <div className="absolute bottom-14 left-0 right-0  flex justify-center text-gray-300 text-sm">
+              Zjedź aby czytać dalej <ChevronDownIcon className="ml-1 w-4 h-4" />
+            </div>
+          )}
             </CardContent>
             <CardFooter className="flex justify-between">
               <Button variant="outline" className="bg-gray-200 text-black hover:bg-gray-300" asChild>

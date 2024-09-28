@@ -43,7 +43,7 @@ export function Portfolio() {
       imageUrl: "/projekty/radiozsen.png",
     },
     {
-      title: "Kulki the game",
+      title: "Kulki",
       description: "Gra stworzona w unity, wyświetlana na rzutniku, sterowana telefonem za pomocą specjalnej aplikacji. Wykorzystuje Reacta, Firebase'a oraz unity",
       demoLink: "https://blu-vs-red.web.app/",
       codeLink: "/404",
