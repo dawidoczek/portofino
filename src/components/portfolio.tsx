@@ -20,7 +20,7 @@ export function Portfolio() {
     },
     {
       title: "Notifical",
-      description: "Drugi powazny projekt, jest to zintegrowany harmonogram posiadający opcje dodawania do kalendarza, wysyłania sms i email, stworzony za pomocą Angulara, express js, Android studio oraz PWA",
+      description: "Notifical jest to zintegrowany harmonogram posiadający opcje dodawania do kalendarza, wysyłania sms i email, stworzony za pomocą Angulara, express js, Android studio",
       demoLink: "https://notifical.memo-1.usermd.net/home",
       codeLink: "/404",
       technology: ["angular","nodejs","postgresql","express","androidstudio"],

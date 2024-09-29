@@ -56,7 +56,7 @@ export function ExperienceTimeline() {
 
   return (
     <div className="container mx-auto p-4 space-y-8 ">
-      <h1 className="text-3xl font-bold text-center mb-8">Osiągnięcia & Doświadczenie</h1>
+      <h1 className="text-3xl font-bold text-white text-center mb-8">Osiągnięcia & Doświadczenie</h1>
       <div ref={containerRef} className="relative pl-12">
         {/* <div className="absolute left-4 top-0 w-0.5 h-full bg-gray-200"></div> */}
         {experiences.map((experience, index) => (
@@ -110,7 +110,7 @@ function TimelineItem({
         <p className="text-sm text-white mt-1">{experience.date}</p>
         <p className="mt-2 text-white">{experience.description}</p>
         {experience.link ? 
-          <p><a href={experience.link} target="_blank"> Więcej informacji</a></p> : ""
+          <p className="text-blue-500"><a href={experience.link} target="_blank"> Więcej informacji</a></p> : ""
         }
       </motion.div>
     </motion.div>

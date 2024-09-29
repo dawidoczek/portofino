@@ -54,7 +54,7 @@ export function ScrollingHeaderComponent() {
         <div className="flex items-center justify-between w-full relative">
           <div className="flex-1 flex items-center">
             <div 
-              className="font-bold absolute left-[85px] sm:left-[60px] md:left-[250px] "
+              className="font-bold absolute left-[23vw] sm:left-[60px] md:left-[250px] "
               style={textStyle}
             >
               Dzień dobry, tu Dawid

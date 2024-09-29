@@ -59,7 +59,7 @@ export function FlippableCardComponent({ project }: FlippableCardProps) {
   }
 
   const handleClick = () => {
-    // return;
+    return;
     setIsClickLocked(!isClickLocked)
     setIsFlipped(isFlipped)
   }
