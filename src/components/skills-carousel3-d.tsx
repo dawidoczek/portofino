@@ -1,5 +1,4 @@
 "use client"
-
 // import React, { useState, useEffect, useCallback } from 'react'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
@@ -53,12 +52,14 @@ const skillsData: SkillsData = {
   
 }
 let intervalId: NodeJS.Timeout | null = null;
+// let progressInterval: NodeJS.Timeout | null = null;
 
 export function SkillsCarousel3DComponent() {
   const categories = Object.keys(skillsData)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoRotating, setIsAutoRotating] = useState(true)
-  const [isWideScreen, setIsWideScreen] = useState(false)
+  const [progress, setProgress] = useState(0)
+
 
   // const resetAutoRotation = useCallback((): void => {
   //   if (intervalId) clearInterval(intervalId)
@@ -84,25 +85,25 @@ export function SkillsCarousel3DComponent() {
 
   // Auto-rotate categories
   useEffect(() => {
+    let progressInterval: NodeJS.Timeout;
+
     if (isAutoRotating) {
+      progressInterval = setInterval(() => {
+        setProgress((prev) => (prev + 1/2) % 100)
+      }, 25) 
+
       intervalId = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length)
+        setProgress(0) 
       }, 5000)
     }
     return () => {
-      if (intervalId) clearInterval(intervalId) // Clean up interval on unmount
+      if (progressInterval) clearInterval(progressInterval)    
+      if (intervalId) clearInterval(intervalId)
     }
     setIsAutoRotating(true)
   }, [isAutoRotating, categories.length])
 
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsWideScreen(true)
-    }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
 
   const getVisibleCategories = () => {
     const prev = (currentIndex - 1 + categories.length) % categories.length
@@ -138,10 +139,11 @@ export function SkillsCarousel3DComponent() {
     style={{
       transformStyle: 'preserve-3d',
       transformOrigin: 'center center',
-      width: isWideScreen ? '28%' : '70%',
+      width: '28%',
       height:"300px",
       minWidth: "200px",
     }}
+    
   >
     <Card className="w-full h-[300px]  shadow-lg bg-[#00000075] overflow-hidden">
       <CardContent className="h-full p-2 relative ">
@@ -159,6 +161,9 @@ export function SkillsCarousel3DComponent() {
   </motion.div>
 ))}
 
+        </div>
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2  self-center w-[28%] h-2 bg-gray-200 rounded-full">
+          <div className="h-full bg-blue-500" style={{ width: `${progress}%` }} />
         </div>
         {/* <Button
           variant="outline"

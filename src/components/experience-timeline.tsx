@@ -2,52 +2,63 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-// import Image from 'next/image'
+import Image from 'next/image'
 
 interface Experience {
   title: string
   date: string
   description: string
   link?: string
+  photo: string
 }
 
 const experiences: Experience[] = [
   {
-    title: "Zwycięstwa ogólnopolskiej Olimpiady zawodowej 'Rok przed dyplomem'",
+    title: "Zwycięstwo w ogólnopolskiej Olimpiadzie zawodowej „Rok przed dyplomem”",
     date: "2024",
-    description: "Olimpiada rok przed dyplomem organizowana była przez Lubelskie Centrum Doskonalenia Nauczycieli, składała się ona z 3 etapów z finałem na Politechnice Lubelskiej",
+    photo:"trophy",
+    description: "Olimpiada „Rok przed dyplomem”, organizowana przez Lubelskie Centrum Doskonalenia Nauczycieli, składała się z trzech etapów, które miały na celu wyłonić uzdolnionych uczniów którzy przystąpią do kwalifikacji INF.04. Finał konkursu odbył się na Politechnice Lubelskiej, oferując uczestnikom możliwość zaprezentowania swoich osiągnięć w akademickim środowisku.",
     link: "https://www.lscdn.pl/pl/konkursy/olimpiada-zawodowa/14664,Wyniki-etapu-centralnego-Ogolnopolskiej-Olimpiady-Zawodowej-Rok-przed-dyplomem.html"
   },
   {
-    title: "Zwycięstwa pierwszej edycji ogólno polskiego konkursu Gigathon",
+    title: "Zwycięstwo w pierwszej edycji ogólnopolskiego konkursu Gigathon",
+    photo:"trophy",
     date: "2023",
-    description: "Wygrałem konkurs Gigantów programowania 'Gigathon' używając pythona, brało w nim udział ponad 8 tysięcy osób. Finał odbył sie 4 lutego 2023 w warszawie.",
+    description: "Wygrałem konkurs Gigantów Programowania „Gigathon”, w którym uczestniczyło ponad 8 tysięcy osób. Do rywalizacji przystąpiłem, wykorzystując swoje umiejętności w Pythonie. Finał odbył się 4 lutego 2023 roku w Warszawie, gdzie miałem okazję zaprezentować swoje rozwiązania i zdobyć cenne doświadczenie.",
     link: "https://www.lublin112.pl/uczen-z-lublina-laureatem-prestizowego-konkursu-programistycznego-gigathon/"
   },
   {
-    title: "Zwycięstca Ligi algorytmicznej",
+    title: "Zwycięzca Ligi Algorytmicznej Centrum Misotrzostwa Informatycznego",
+    photo:"trophy",
     date: "2023",
-    description: "W 2023 roku brałem udział w konkursie Liga algorytmiczna organizowanym przez Centrum mistrzostwa informatycznego. Konkurs ten polegał na rozwiązywaniu zadań algorytmicznych co miesiąc przez długość roku szkolnego, celem uzyskania największej liczby punktów"
+    description: "W 2023 roku uczestniczyłem w konkursie „Liga Algorytmiczna”, organizowanym przez Centrum Mistrzostwa Informatycznego. Konkurs ten polegał na comiesięcznym rozwiązywaniu zadań algorytmicznych przez cały rok szkolny, a moim celem było zdobycie jak największej liczby punktów. To doświadczenie pozwoliło mi na rozwinięcie umiejętności analitycznych oraz programistycznych.",
+    link: "https://old.zsen.lublin.eu/kolejny-sukces-uczniow-z-kola-informatycznego-w-ramach-projektu-centrum-mistrzostwa-informatycznego/"
   },
   {
-    title: "Dwukrotny pół finalista w Zawodach Algorytmicznych",
+    title: "Dwukrotny półfinalista w Zawodach Algorytmicznych",
+    photo:"trophy",
     date: "2022 - 2023",
-    description: "W 2022 drugim oraz 2023 roku wraz z dwójką kompanów dwukrotnie dostaliśmy się do pół finałów, lecz za kadżym razem zabrakło nam punktów do finału. Dzięki temu konkursowi zobaczyłem i rozpocząłem swoją przygode z poważniejszym programowanie konkursowym."
+    description: "W 2022 i 2023 roku, wraz z dwójką kolegów, dwukrotnie dostaliśmy się do półfinałów konkursu. Udział w tym konkursie był dla mnie ważnym krokiem, który otworzył drzwi do poważniejszego programowania konkursowego i pozwolił mi na rozwój umiejętności w tej dziedzinie.",
+    link:"https://old.zsen.lublin.eu/zawody-algorytmiczne-w-ramach-projektu-centrum-mistrzostwa-informatycznego/"
   },
   {
-    title: "3 miejsce w konkursie o cyberbezpieczeństwie  'Dzień bezpiecznego komputera'",
-    date: "2022",
-    description: "Secured 3rd place in the Safe Computer competition."
+    title: "3. miejsce w konkursie o cyberbezpieczeństwie „Dzień Bezpiecznego Komputera”",
+    photo:"lock",
+    date: "2021",
+    description: "Zająłem 3. miejsce w ogólnopolskim konkursie o cyberbezpieczeństwie „Dzień Bezpiecznego Komputera”, rywalizując z uczniami z 42 szkół z całej Polski. To osiągnięcie potwierdza moją wiedzę w dziedzinie bezpieczeństwa komputerowego oraz zaangażowanie w rozwijanie umiejętności w tej ważnej tematyce.",
+    link:'https://old.zsen.lublin.eu/dawid-rej-uczen-klasy-iict-technik-programista-laureatem-xvii-regionalnego-konkursu-informatycznego-dzien-bezpiecznego-komputera/'
   },
   {
     title: "Miesięczne praktyki w Slavexie",
+    photo:"briefcase",
     date: "2022",
-    description: "Ukończyłem miesięczne praktyki w firmie Slavex, pracując i ucząc sie podstaw helpdesku, naprawiania błedów w kodzie, czy pisania narzędzi i skryptów do wykorzystania w firmie."
+    description: "Ukończyłem miesięczne praktyki w firmie Slavex, podczas których zdobywałem wiedzę i umiejętności w zakresie podstaw helpdesku, naprawy błędów w kodzie oraz pisania narzędzi i skryptów do wykorzystania w firmie. To doświadczenie pozwoliło mi na praktyczne zastosowanie mojej wiedzy oraz rozwój umiejętności technicznych w realnym środowisku pracy."
   },
   {
     title: "Pół roczne praktyki w Provisto",
+    photo:"briefcase",
     date: "2023-2024",
-    description: "Podczas praktyk w firmie Provisto, wykonałem własny harmonogram z wbudowanym kalendarzem, funkcją wysyłania smsów, emaili oraz koordynowaniem pracowników."
+    description: "Podczas praktyk w firmie Provisto stworzyłem własny harmonogram, który zawierał wbudowany kalendarz oraz funkcje wysyłania SMS-ów i e-maili. Dodatkowo, narzędzie umożliwiało koordynację pracowników, co znacząco usprawniło organizację pracy w zespole. To doświadczenie pozwoliło mi na praktyczne zastosowanie umiejętności programistycznych oraz zrozumienie potrzeb użytkowników."
   }
 ]
 
@@ -101,7 +112,7 @@ function TimelineItem({
       style={{ scale, opacity }}
     >
       <div className="absolute -left-8 top-0 flex items-center justify-center w-8 h-8 bg-primary rounded-full shadow-lg overflow-hidden z-10">
-        {/* <Image src="/placeholder.svg?height=32&width=32" alt="" width={32} height={32} /> */}
+        <Image src={`/projekty/${experience.photo}.svg`} className="invert"  alt="trophy" width={25} height={25} />
       </div>
       <motion.div 
         className="bg-[#00000075] p-4 rounded-lg shadow-md border border-gray-200 transition-all duration-300"

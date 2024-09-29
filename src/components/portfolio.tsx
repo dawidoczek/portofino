@@ -8,16 +8,9 @@ import { SkillsCarousel3DComponent } from "./skills-carousel3-d"
 import { ScrollingHeaderComponent } from './scrolling-header'
 import type { Project } from '@/types'
 
+
 export function Portfolio() {
   const projects: Project[] = [
-    {
-      title: "EscapeWheels",
-      description: "Działający sklep internetowy którego byłem współtwórcą, oraz głównym Administratorem. Wykorzystuje Wordpressa z Woocomercem.",
-      demoLink: "https://escapewheels.pl/",
-      codeLink: "/404",
-      technology: ["wordpress"],
-      imageUrl: "/projekty/escape.png",
-    },
     {
       title: "Notifical",
       description: "Notifical jest to zintegrowany harmonogram posiadający opcje dodawania do kalendarza, wysyłania sms i email, stworzony za pomocą Angulara, express js, Android studio",
@@ -58,6 +51,14 @@ export function Portfolio() {
       technology: ["cpp"],
       imageUrl: "/projekty/gra2.gif",
     },
+    {
+      title: "EscapeWheels",
+      description: "Działający sklep internetowy którego byłem współtwórcą, oraz głównym Administratorem. Wykorzystuje Wordpressa z Woocomercem.",
+      demoLink: "https://escapewheels.pl/",
+      codeLink: "/404",
+      technology: ["wordpress"],
+      imageUrl: "/projekty/escape.png",
+    },
   ]
   
   const imageRef = useRef<HTMLDivElement>(null)
@@ -81,7 +82,7 @@ export function Portfolio() {
       const topValue =0
       // const leftValue = Math.max(0, initialPosition.left - scrollY / 2);
       const leftValue = 0
-      if (scrollY>10){
+      if (scrollY>100){
       
       setImageStyle({
         position: 'fixed',
@@ -115,81 +116,76 @@ export function Portfolio() {
   }, [handleScroll])
 
   return (
-    <div className="min-h-screen bg-no-repeat bg-8  bg-cover  bg-center bg-fixed text-gray-900">
+    <div className="min-h-screen bg-no-repeat bg-8 bg-cover bg-center bg-fixed text-gray-900">
       <ScrollingHeaderComponent />
-
       <div className="container mx-auto px-4 py-8">
         {/* Photo and Description */}
-       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-  <div className="lg:col-span-3">
-    <div className="flex flex-col md:flex-row gap-8">
-      
-      {/* Dummy div to reserve space for the fixed image */}
-      <div className="w-32 h-32 md:w-64 md:h-64 flex-shrink-0"></div> 
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          <div className="lg:col-span-3">
+            <div className="flex flex-col md:flex-row gap-8">
+              {/* Dummy div to reserve space for the fixed image */}
+              <div className="w-32 h-32 md:w-64 md:h-64 flex-shrink-0"></div> 
 
-      {/* Fixed Image Section */}
-      <div 
-        ref={imageRef}
-        className="flex-shrink-0 fixed"
-        style={imageStyle}
-      >
-        <Image
-          src="/projekty/dawid.png"
-          alt="Zdjęcie twórcy"
-          width={256}
-          height={256}
-          className="rounded-full object-cover w-32 h-32 md:w-64 md:h-64" // Scale down for smaller screens
-        />
-      </div>
+              <div 
+                ref={imageRef}
+                className="flex-shrink-0 fixed"
+                style={imageStyle}
+              >
+                <Image
+                  src="/projekty/dawid.png"
+                  alt="Zdjęcie twórcy"
+                  width={256}
+                  height={256}
+                  className="rounded-full object-cover w-32 h-32 md:w-64 md:h-64" // Scale down for smaller screens
+                />
+              </div>
 
-      {/* Description Section */}
-      <section className="bg-[#00000075] backdrop-blur-lg p-6 rounded-lg shadow-md border border-gray-200 flex-1">
-        <h2 className="text-3xl font-semibold mb-4 text-white">Dzień dobry, tu Dawid</h2>
-        <p className="text-lg text-white">
-          Jestem tegorocznym absolwentem Zespołu Szkół Energetycznych w Lublinie na profilu technik programista. Mam 19 lat i interesuję się programowaniem od dziewiątego roku życia. Moim ulubionym językiem programowania jest Python, jednak z równie dużym zapałem rozwijam swoje umiejętności w tworzeniu stron internetowych, szczególnie w zakresie backendu.
-          <br />
-          Posiadam certyfikat INF 0.3, który potwierdza moje kompetencje w tworzeniu oraz administrowaniu stronami i aplikacjami internetowymi oraz bazami danych. Jestem osobą pracowitą, cenię sobie rozwój, a także chętnie pomagam innym w osiąganiu ich celów. Obecnie mieszkam w Lublinie.
-          <br />
-          Mój email: <a href='mailto:rej.dawid1@gmail.com' className="text-blue-500">rej.dawid1@gmail.com</a>
-        </p>
-      </section>
-      
-    </div>
-  </div>
-</div>
-
-
+              {/* Description Section */}
+              <section className="bg-[#00000075] backdrop-blur-lg p-6 rounded-lg shadow-md border border-gray-200 flex-1">
+                <h2 className="text-3xl font-semibold mb-4 text-white">Dzień dobry, tu Dawid</h2>
+                <p className="text-lg text-white">
+                  Jestem tegorocznym absolwentem Zespołu Szkół Energetycznych w Lublinie na profilu technik programista. Mam 19 lat i interesuję się programowaniem od dziewiątego roku życia. Moim ulubionym językiem programowania jest Python, jednak z równie dużym zapałem rozwijam swoje umiejętności w tworzeniu stron internetowych, szczególnie w zakresie backendu.
+                  <br />
+                  Posiadam certyfikat INF.03, który potwierdza moje kompetencje w tworzeniu oraz administrowaniu stronami i aplikacjami internetowymi oraz bazami danych. Jestem osobą pracowitą, cenię sobie rozwój, a także chętnie pomagam innym w osiąganiu ich celów. Obecnie mieszkam w Lublinie.
+                  <br />
+                  <span className="pointer-events-auto">Mój email: <a href='mailto:rej.dawid1@gmail.com' className="text-blue-500">rej.dawid1@gmail.com</a></span>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
 
         {/* Skills Carousel, Experience, and Projects */}
-        <div className="grid grid-cols-1  lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-4 space-y-8">
             {/* Skills Carousel */}
             <div>
               <SkillsCarousel3DComponent />
             </div>
-            
-            {/* Experience Timeline */}
-            <div>
-              <ExperienceTimeline />
-            </div>
-          </div>
-          
-          {/* Projects */}
-          <div className="lg:col-span-1">
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-center mb-8 text-white">Moje projekty</h2>
-              {projects.map((project, index) => (
-                <FlippableCardComponent key={index} project={project} />
-              ))}
+
+            {/* Experience Timeline and Projects */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              <div className="col-span-3">
+                <ExperienceTimeline />
+              </div>
+              
+              {/* Projects */}
+              <div className="gap-8 mt-4 space-y-8">
+                <h2 className="text-3xl font-bold text-center mb-8 text-white">Moje projekty</h2>
+                {projects.map((project, index) => (
+                  <FlippableCardComponent key={index} project={project} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
+
       </div>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white p-4 mt-8 rounded-t-lg shadow-md">
         <div className="container mx-auto text-center">
-          <p>Made with 💛, NextJs, Tailwind CSS, Framer Motion, and Vercel</p>
+          <p>Made with 💛, NextJs, Tailwind CSS, Framer Motion, & Vercel</p>
           <p>Copyright &copy; {new Date().getFullYear()}, Dawid Rej.</p>
         </div>
       </footer>
