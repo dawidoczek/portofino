@@ -47,14 +47,14 @@ export function ScrollingHeaderComponent() {
   }
   return (
     <header 
-      ref={headerRef} // Set reference to header
+      ref={headerRef}
       className="sticky top-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b border-border"
     >
       <div className="container flex h-16 max-w-screen-2xl items-center">
         <div className="flex items-center justify-between w-full relative">
           <div className="flex-1 flex items-center">
             <div 
-              className="font-bold absolute left-[23vw] sm:left-[60px] md:left-[250px] "
+              className="font-bold absolute left-[23vw] sm:left-[60px] md:left-[250px] text-white"
               style={textStyle}
             >
               Dzień dobry, tu Dawid

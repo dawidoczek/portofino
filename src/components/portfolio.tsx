@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react"
 import Image from "next/image"
 import { FlippableCardComponent } from "@/components/flippable-card"
+import ProjectCarousel from './project-carousel'
 import { ExperienceTimeline } from "./experience-timeline"
 import { SkillsCarousel3DComponent } from "./skills-carousel3-d"
 import { ScrollingHeaderComponent } from './scrolling-header'
@@ -63,6 +64,7 @@ export function Portfolio() {
   
   const imageRef = useRef<HTMLDivElement>(null)
   const [imageStyle, setImageStyle] = useState({})
+
   const [initialPosition, setInitialPosition] = useState({ top: 0, left: 0 });
   useEffect(() => {
     if (imageRef.current) {
@@ -106,7 +108,10 @@ export function Portfolio() {
     }
   }
   }, [initialPosition]);
+const textStyle = {
+  transition: 'transform 0.25s ease-out, top 0.25s ease-out, left 0.25s ease-out',
 
+}
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
@@ -120,7 +125,7 @@ export function Portfolio() {
       <ScrollingHeaderComponent />
       <div className="container mx-auto px-4 py-8">
         {/* Photo and Description */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8" style={textStyle}>
           <div className="lg:col-span-3">
             <div className="flex flex-col md:flex-row gap-8">
               {/* Dummy div to reserve space for the fixed image */}
@@ -164,23 +169,21 @@ export function Portfolio() {
             </div>
 
             {/* Experience Timeline and Projects */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 gap-8">
               <div className="col-span-3">
                 <ExperienceTimeline />
               </div>
               
               {/* Projects */}
-              <div className="gap-8 mt-4 space-y-8">
-                <h2 className="text-3xl font-bold text-center mb-8 text-white">Moje projekty</h2>
-                {projects.map((project, index) => (
-                  <FlippableCardComponent key={index} project={project} />
-                ))}
-              </div>
+
             </div>
           </div>
         </div>
 
       </div>
+                <div className="container mx-auto py-12">
+      <ProjectCarousel projects={projects} />
+              </div>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white p-4 mt-8 rounded-t-lg shadow-md">

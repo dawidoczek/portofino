@@ -73,15 +73,17 @@ export function FlippableCardComponent({ project }: FlippableCardProps) {
       onClick={handleClick}
     >
 
-      <div className={`flip-card ${isFlipped ? 'flipped' : ''}`}>
-        <div className="flip-card-front">
-          <Image src={imageUrl} fill={true} alt={project.title} className="w-full h-full object-cover rounded-lg" />
-          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 rounded-b-lg">
-            <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-            <div className="flex gap-2">
-              {project.technology.map((tek, index) => (
-                <Image key={index} src={`https://skillicons.dev/icons?i=${tek}&theme=light`} width={24} height={24} alt={tek} className="inline-block" />
-              ))}
+      <div className={`flip-card ${isFlipped ? 'flipped' : ''} h-full w-full`}>
+        <div className="flip-card-front h-full w-full">
+          <div className="relative h-full w-full">
+            <Image src={imageUrl} layout="fill" objectFit="cover" alt={project.title} className="rounded-lg" />
+            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 rounded-b-lg">
+              <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+              <div className="flex gap-2">
+                {project.technology.map((tek, index) => (
+                  <Image key={index} src={`https://skillicons.dev/icons?i=${tek}&theme=light`} width={24} height={24} alt={tek} className="inline-block" />
+                ))}
+              </div>
             </div>
           </div>
         </div>

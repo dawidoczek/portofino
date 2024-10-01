@@ -17,7 +17,7 @@ const config: Config = {
 			'5':"url(/background/mirror.jpg)",
 			'6':"url(/background/6.jpg)",
 			'7':"url(/background/7.jpg)",
-			'8':"url(/background/8.jpg)",
+			'8':"url(/background/8.1.jpg)",
 			'9':"url(/background/9.jpg)",
 			'10':"url(/background/10.jpg)",
 			'11':"url(/background/11.jpg)",

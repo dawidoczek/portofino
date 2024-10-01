@@ -1,11 +1,10 @@
 "use client"
-// import React, { useState, useEffect, useCallback } from 'react'
+
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-// import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from 'next/image'
-// import { ChevronLeftIcon, ChevronRightIcon, PauseIcon, PlayIcon } from 'lucide-react'
+import { useSwipeable } from 'react-swipeable'
 
 interface Skill {
   name: string
@@ -49,10 +48,7 @@ const skillsData: SkillsData = {
     { name: "Android Studio", icon: "https://skillicons.dev/icons?i=androidstudio&theme=light" },
     { name: "Unity", icon: "https://skillicons.dev/icons?i=unity&theme=light" },
   ],
-  
 }
-let intervalId: NodeJS.Timeout | null = null;
-// let progressInterval: NodeJS.Timeout | null = null;
 
 export function SkillsCarousel3DComponent() {
   const categories = Object.keys(skillsData)
@@ -60,50 +56,26 @@ export function SkillsCarousel3DComponent() {
   const [isAutoRotating, setIsAutoRotating] = useState(true)
   const [progress, setProgress] = useState(0)
 
-
-  // const resetAutoRotation = useCallback((): void => {
-  //   if (intervalId) clearInterval(intervalId)
-    
-  //   if (isAutoRotating) {
-  //     intervalId = setInterval(() => {
-  //       setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length)
-  //     }, 5000) 
-  //   }
-  // }, [isAutoRotating, categories.length])
-
-  // const nextCategory = useCallback((): void => {
-  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length)
-  //   if (intervalId) clearInterval(intervalId)
-  //   resetAutoRotation() // Reset timer on click
-  // }, [categories.length, resetAutoRotation])
-
-  // const prevCategory = useCallback((): void => {
-  //   setCurrentIndex((prevIndex) => (prevIndex - 1 + categories.length) % categories.length)
-  //   if (intervalId) clearInterval(intervalId)
-  //   resetAutoRotation() // Reset timer on click
-  // }, [categories.length, resetAutoRotation])
-
-  // Auto-rotate categories
   useEffect(() => {
-    let progressInterval: NodeJS.Timeout;
+    let progressInterval: NodeJS.Timeout
+    let rotationInterval: NodeJS.Timeout
 
     if (isAutoRotating) {
-      progressInterval = setInterval(() => {
-        setProgress((prev) => (prev + 1/2) % 100)
-      }, 25) 
+      // progressInterval = setInterval(() => {
+      //   setProgress((prev) => (prev + 1/2) % 100)
+      // }, 25)
 
-      intervalId = setInterval(() => {
+      rotationInterval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length)
-        setProgress(0) 
-      }, 5000)
+        setProgress(0)
+      }, 2500)
     }
-    return () => {
-      if (progressInterval) clearInterval(progressInterval)    
-      if (intervalId) clearInterval(intervalId)
-    }
-    setIsAutoRotating(true)
-  }, [isAutoRotating, categories.length])
 
+    return () => {
+      if (progressInterval) clearInterval(progressInterval)
+      if (rotationInterval) clearInterval(rotationInterval)
+    }
+  }, [isAutoRotating, categories.length])
 
   const getVisibleCategories = () => {
     const prev = (currentIndex - 1 + categories.length) % categories.length
@@ -111,84 +83,68 @@ export function SkillsCarousel3DComponent() {
     return [prev, currentIndex, next, (next + 1) % categories.length]
   }
 
-  // const toggleAutoRotation = () => {
-  //   if (intervalId) clearInterval(intervalId)
-  //   setIsAutoRotating((prev) => !prev)
-  // }
+  const handleSwipe = (direction: 'LEFT' | 'RIGHT') => {
+    setIsAutoRotating(false)
+    if (direction === 'LEFT') {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length)
+    } else {
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + categories.length) % categories.length)
+    }
+    setProgress(0)
+  }
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleSwipe('LEFT'),
+    onSwipedRight: () => handleSwipe('RIGHT'),
+    trackMouse: true
+  })
 
   return (
-    
     <div className="w-full mx-auto p-0">
-          <h1 className="text-3xl font-bold text-center text-white mb-0">Moje umiejętności</h1>
-
-      <div className="relative h-[400px] overflow-hidden">
+      <h1 className="text-3xl font-bold text-center text-white mb-0">Moje umiejętności</h1>
+      <h6 className="text-2xl font-bold text-center text-gray-400 mb-0" >Przesuń aby zmienić kategorie</h6>
+      <div {...swipeHandlers} className="relative h-[400px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: '1500px' }}>
-        {getVisibleCategories().map((categoryIndex, index) => (
-  <motion.div
-    key={categories[categoryIndex]}
-    className="absolute backdrop-blur-lg"
-    initial={false}
-    animate={{
-      rotateY: (index - 1) * 40,
-      z: index === 1 ? 0 : -120,
-      x: index != 3 ? `${(index - 1) * 90}%` : 0,
-      opacity: index === 1 ? 1 : 0.6, 
-      scale: index === 1 ? 1 : index === 3 ? 0 : 0.75,
-    }}
-    transition={{ duration: 1.2, ease: 'easeInOut' }} 
-    style={{
-      transformStyle: 'preserve-3d',
-      transformOrigin: 'center center',
-      width: '28%',
-      height:"300px",
-      minWidth: "200px",
-    }}
-    
-  >
-    <Card className="w-full h-[300px]  shadow-lg bg-[#00000075] overflow-hidden">
-      <CardContent className="h-full p-2 relative ">
-        <h2 className="text-xl font-bold mb-2 text-center text-white">{categories[categoryIndex]}</h2>
-        <div className="grid grid-cols-2 gap-1 overflow-y-auto max-h-[350px]">
-          {skillsData[categories[categoryIndex]].map((skill) => (
-            <div key={skill.name} className="flex flex-col items-center justify-center p-2">
-              <Image width={32} height={32} src={skill.icon} alt={skill.name} className="w-8 h-8 mb-1" />
-              <p className="text-center text-xs font-medium text-white">{skill.name}</p>
-            </div>
+          {getVisibleCategories().map((categoryIndex, index) => (
+            <motion.div
+            key={categories[categoryIndex]}
+            className="absolute backdrop-blur-lg"
+            initial={false}
+            animate={{
+              rotateY: (index - 1) * 40,
+              z: index === 1 ? 0 : -120,
+              x: index != 3 ? `${(index - 1) * 90}%` : 0,
+              opacity: index === 1 ? 1 : 0.6, 
+              scale: index === 1 ? 1 : index === 3 ? 0 : 0.75,
+            }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }} 
+            style={{
+              transformStyle: 'preserve-3d',
+              transformOrigin: 'center center',
+              width: '28%',
+              height:"300px",
+              minWidth: "200px",
+            }}
+            >
+              <Card className="w-full h-[300px] shadow-lg bg-[#00000075] overflow-hidden">
+                <CardContent className="h-full p-2 relative">
+                  <h2 className="text-xl font-bold mb-2 text-center text-white">{categories[categoryIndex]}</h2>
+                  <div className="grid grid-cols-2 gap-1 overflow-y-auto max-h-[350px]">
+                    {skillsData[categories[categoryIndex]].map((skill) => (
+                      <div key={skill.name} className="flex flex-col items-center justify-center p-2">
+                        <Image width={32} height={32} src={skill.icon} alt={skill.name} className="w-8 h-8 mb-1" />
+                        <p className="text-center text-xs font-medium text-white">{skill.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
-      </CardContent>
-    </Card>
-  </motion.div>
-))}
-
-        </div>
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2  self-center w-[28%] h-2 bg-gray-200 rounded-full">
-          <div className="h-full bg-blue-500" style={{ width: `${progress}%` }} />
-        </div>
-        {/* <Button
-          variant="outline"
-          size="icon"
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10"
-          onClick={prevCategory}
-        >
-          <ChevronLeftIcon className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10"
-          onClick={nextCategory}
-        >
-          <ChevronRightIcon className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
-          onClick={toggleAutoRotation}
-        >
-          {isAutoRotating ? <PauseIcon className="h-4 w-4" /> : <PlayIcon className="h-4 w-4" />}
-        </Button> */}
+        {/* <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 self-center w-[28%] h-2 bg-gray-200 rounded-full">
+          <div className="h-full bg-gray-600" style={{ width: `${progress}%` }} />
+        </div> */}
       </div>
     </div>
   )
