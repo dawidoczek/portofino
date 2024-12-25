@@ -2,7 +2,6 @@
 
 import React, { useRef, useEffect, useState, useCallback } from "react"
 import Image from "next/image"
-import { FlippableCardComponent } from "@/components/flippable-card"
 import ProjectCarousel from './project-carousel'
 import { ExperienceTimeline } from "./experience-timeline"
 import { SkillsCarousel3DComponent } from "./skills-carousel3-d"
@@ -137,11 +136,11 @@ const textStyle = {
                 style={imageStyle}
               >
                 <Image
-                  src="/projekty/dawid.png"
+                  src="/projekty/ja2.png"
                   alt="Zdjęcie twórcy"
                   width={256}
                   height={256}
-                  className="rounded-full object-cover w-32 h-32 md:w-64 md:h-64" // Scale down for smaller screens
+                  className="rounded-full object-cover w-32 h-32 md:w-64 md:h-64" 
                 />
               </div>
 
@@ -173,9 +172,6 @@ const textStyle = {
               <div className="col-span-3">
                 <ExperienceTimeline />
               </div>
-              
-              {/* Projects */}
-
             </div>
           </div>
         </div>

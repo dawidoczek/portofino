@@ -45,7 +45,6 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
     draggable:true,
     touchThreshold:30,
     speed: 500,
-    // autoplaySpeed:2000,
     autoplay:true,
     slidesToShow: 3,
     slidesToScroll: 1,

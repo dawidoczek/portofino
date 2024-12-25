@@ -54,10 +54,10 @@ export function SkillsCarousel3DComponent() {
   const categories = Object.keys(skillsData)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoRotating, setIsAutoRotating] = useState(true)
-  const [progress, setProgress] = useState(0)
+  // const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    let progressInterval: NodeJS.Timeout
+    // let progressInterval: NodeJS.Timeout
     let rotationInterval: NodeJS.Timeout
 
     if (isAutoRotating) {
@@ -67,13 +67,11 @@ export function SkillsCarousel3DComponent() {
 
       rotationInterval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length)
-        setProgress(0)
+        // setProgress(0)
       }, 2500)
     }
 
     return () => {
-      if (progressInterval) clearInterval(progressInterval)
-      if (rotationInterval) clearInterval(rotationInterval)
     }
   }, [isAutoRotating, categories.length])
 
@@ -90,7 +88,7 @@ export function SkillsCarousel3DComponent() {
     } else {
       setCurrentIndex((prevIndex) => (prevIndex - 1 + categories.length) % categories.length)
     }
-    setProgress(0)
+    // setProgress(0)
   }
 
   const swipeHandlers = useSwipeable({
