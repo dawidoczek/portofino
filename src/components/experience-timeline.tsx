@@ -49,16 +49,22 @@ const experiences: Experience[] = [
     link:'https://old.zsen.lublin.eu/dawid-rej-uczen-klasy-iict-technik-programista-laureatem-xvii-regionalnego-konkursu-informatycznego-dzien-bezpiecznego-komputera/'
   },
   {
-    title: "Miesięczne praktyki w Slavexie",
+    title: "Miesięczne praktyki w Slawexie",
     photo:"briefcase",
     date: "2022",
-    description: "Ukończyłem miesięczne praktyki w firmie Slavex, podczas których zdobywałem wiedzę i umiejętności w zakresie podstaw helpdesku, naprawy błędów w kodzie oraz pisania narzędzi i skryptów do wykorzystania w firmie. To doświadczenie pozwoliło mi na praktyczne zastosowanie mojej wiedzy oraz rozwój umiejętności technicznych w realnym środowisku pracy."
+    description: "Ukończyłem miesięczne praktyki w firmie Slawex, podczas których zdobywałem wiedzę i umiejętności w zakresie podstaw helpdesku, naprawy błędów w kodzie oraz pisania narzędzi i skryptów do wykorzystania w firmie. To doświadczenie pozwoliło mi na praktyczne zastosowanie mojej wiedzy oraz rozwój umiejętności technicznych w realnym środowisku pracy."
   },
   {
     title: "Pół roczne praktyki w Provisto",
     photo:"briefcase",
     date: "2023-2024",
     description: "Podczas praktyk w firmie Provisto stworzyłem własny harmonogram, który zawierał wbudowany kalendarz oraz funkcje wysyłania SMS-ów i e-maili. Dodatkowo, narzędzie umożliwiało koordynację pracowników, co znacząco usprawniło organizację pracy w zespole. To doświadczenie pozwoliło mi na praktyczne zastosowanie umiejętności programistycznych oraz zrozumienie potrzeb użytkowników."
+  },
+  {
+    title: "8 miesięcy w Talex S.A",
+    photo:"briefcase",
+    date: "2025-2026",
+    description: "Jestem obecnie zatrudniony jako Specjalista IT ds. Wsparcia Terenowego, zarządzam infrastrukturą sprzętową w placówkach klientów (komputery stacjonarne, laptopy, drukarki, urządzenia peryferyjne), diagnozuje i naprawiam (Hardware/Software) awarie u klienta."
   }
 ]
 
@@ -82,6 +88,7 @@ export function ExperienceTimeline() {
     </div>
   )
 }
+
 
 function TimelineItem({ 
   experience, 

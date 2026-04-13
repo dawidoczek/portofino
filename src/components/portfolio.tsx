@@ -19,14 +19,14 @@ export function Portfolio() {
       technology: ["angular","nodejs","postgresql","express","androidstudio"],
       imageUrl: "/projekty/notifical.png",
     },
-    {
-      title: "Zsen Kalendarz",
-      description: "Angularowy harmonogram do zapisywania wydarzeń, wraz z REST Api do firebase'a, stworzony we współpracy z kolegami jako projekt na zaliczenie ",
-      demoLink: "/404",
-      codeLink: "https://github.com/dawidoczek/ZSEN-KALENDARZ",
-      technology: ["angular","firebase","bootstrap","nodejs"],
-      imageUrl: "/projekty/kalendarz.png",
-    },
+      {
+      title: "t3gLeaderboard",
+      description: "t3gLeaderboard to aplikacja do sprawdzania statystyk kont na instragramie, poprzez scrapowanie instagrama, stworzona za pomocą NextJs i python",
+      demoLink: "https://t3gleaderboard.web.app/",
+      codeLink: "/https://github.com/dawidoczek/t3gLeaderboard",
+      technology: ["react","nodejs","nextjs","python","docker"],
+      imageUrl: "/projekty/t3g.png",
+    },  
     {
       title: "Radio ZSEN",
       description: "Strona szkolnego radia, stworzona w reactcie wraz z Firebasem. Posiada Api do scrapeowania geniusa w celu szukania brzydkich słów.",
@@ -136,7 +136,7 @@ const textStyle = {
                 style={imageStyle}
               >
                 <Image
-                  src="/projekty/ja2.png"
+                  src="/projekty/dawid2.png"
                   alt="Zdjęcie twórcy"
                   width={256}
                   height={256}
@@ -148,9 +148,9 @@ const textStyle = {
               <section className="bg-[#00000075] backdrop-blur-lg p-6 rounded-lg shadow-md border border-gray-200 flex-1">
                 <h2 className="text-3xl font-semibold mb-4 text-white">Dzień dobry, tu Dawid</h2>
                 <p className="text-lg text-white">
-                  Jestem tegorocznym absolwentem Zespołu Szkół Energetycznych w Lublinie na profilu technik programista. Mam 19 lat i interesuję się programowaniem od dziewiątego roku życia. Moim ulubionym językiem programowania jest Python, jednak z równie dużym zapałem rozwijam swoje umiejętności w tworzeniu stron internetowych, szczególnie w zakresie backendu.
+                  Jestem studentem 1 roku na Politechnice Lubelskiej, kierunek informatyka. Mam 20 lat i interesuję się programowaniem od dziewiątego roku życia. Moim ulubionym językiem programowania jest Python, jednak z równie dużym zapałem rozwijam swoje umiejętności w tworzeniu stron internetowych, szczególnie w zakresie backendu.
                   <br />
-                  Posiadam certyfikat INF.03, który potwierdza moje kompetencje w tworzeniu oraz administrowaniu stronami i aplikacjami internetowymi oraz bazami danych. Jestem osobą pracowitą, cenię sobie rozwój, a także chętnie pomagam innym w osiąganiu ich celów. Obecnie mieszkam w Lublinie.
+                  Posiadam certyfikat INF.03 oraz INF.04, które potwierdzają moje kompetencje w tworzeniu oraz administrowaniu stronami i aplikacjami internetowymi oraz bazami danych oraz certyfikat ECDL Advanced Arkusze Kalkulacyjne (Excel) ,certyfikat ECDL Advanced użytkowanie baz danych (Microsoft Access i SQL) Jestem osobą pracowitą, cenię sobie rozwój, a także chętnie pomagam innym w osiąganiu ich celów. Obecnie mieszkam w Lublinie.
                   <br />
                   <span className="pointer-events-auto">Mój email: <a href='mailto:rej.dawid1@gmail.com' className="text-blue-500">rej.dawid1@gmail.com</a></span>
                 </p>

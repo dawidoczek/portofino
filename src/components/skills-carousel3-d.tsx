@@ -64,7 +64,7 @@ export function SkillsCarousel3DComponent() {
       // progressInterval = setInterval(() => {
       //   setProgress((prev) => (prev + 1/2) % 100)
       // }, 25)
-
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
       rotationInterval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % categories.length)
         // setProgress(0)
